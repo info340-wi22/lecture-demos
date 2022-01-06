@@ -1,0 +1,46 @@
+h1 {
+    font-family: 'Helvetica';
+    color: white;
+    background-color: #333; /*dark gray*/   
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+h2 {
+    background-color: lightblue;
+}
+
+img {
+    border-radius: 15px;
+}
+
+.dog-image {
+    max-width: 300px;
+}
+
+em {
+    font-style: normal;
+    text-decoration: underline;
+}
+
+/* generic parapraph styling */
+p {
+    font-size: 18px;
+}
+
+/* specific paragraphs */
+.important {
+    font-size: 32px;
+}
+
+.big-text {
+    font-size: 20px;
+}
+
+.demo {
+    background-color: yellow;
+}
+
+.media {
+    background-color: #eee;
+}
