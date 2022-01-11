@@ -1,35 +1,64 @@
 
 
-/* Q1
-.alert.success {
+/* Q1 */
+/* .alert.success {
   color: yellow;
 }
 .alert .success {
   color: yellow;
 }
+
 .alert, .success {
   color: yellow
 }
+
 .alert--.success {
   color: yellow
-}
-*/
+} */
 
 
-/* Q2
-.first.second { color: green};
-div > p { color: green; }
-div .second, #first { color: green; }
-p:last-child { color: green; } 
-*/
 
+/* Q2 */
+/* .first.second { color: green}; */
+/* div > p { color: green; } */
+/* div .second, #first { color: green; } */
+/* p:last-child { color: green; }  */
+
+/* p that is inside div, but not p inside of section */
+/* div > p  */
+/* p inside of div, p inside of section inside of div */
+/* div p */
 
 /* Q3 */
-/*
-p { color: gray; }
-#red p { color: red; }
+
 .blue { color: blue; }
+p { color: gray; }
+#red p.blue { color: red; }
 #red .blue { color: magenta; }
 .green p { color: lightgreen; }
 div.green p.blue { color: cyan; }
-*/
+
+nav ul a {
+
+}
+
+.important {
+
+}
+
+nav a:hover, nav a:focus {
+  font-size: x-large;
+}
+
+a:visited {
+  color: blue;
+}
+
+
+.forum-post {
+  font-size: 16px;
+  color: grey;
+  background-color;
+  width:
+  padding:
+}
