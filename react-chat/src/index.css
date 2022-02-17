@@ -1,13 +1,59 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html, body, #root, #root > div {
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.material-icons {
+  position: relative;
+  top: 4px;
+}
+
+
+/*** Channel List ***/
+
+.channel-list {
+  height: 100%; /* hacky, flexbox would be better */
+}
+
+
+/*** Message Pane ***/
+
+.chat-pane {
+  /* will enable it to scroll content */
+  flex: 1 1 auto;
+  height:0;
+  overflow: auto;
+}
+
+.message {
+  margin-bottom: 1rem;
+}
+
+.message img {
+  width:50px;
+  border-radius: 50%;
+  margin-right:5px;
+}
+
+.message-body p {
+  margin-bottom: 0;
+}
+
+/* name */
+.message-body p:nth-child(1) {
+  font-weight: bold;
+}
+
+/* like-buttonn */
+.like-button {
+  padding: 0;
+}
+.like-button .material-icons {
+  position:relative;
+  top:0px;
+}
+
+
+/*** ComposeForm ***/
+textarea {
+    resize:none
 }
