@@ -4,13 +4,15 @@ import ChannelNav from './ChannelNav';
 import { MessagePane } from './Messages';
 import ComposeForm from './ComposeForm';
 
-import CHAT_LOG from '../data/chat_log.json';
+import SAMPLE_CHAT_LOG from '../data/chat_log.json';
 
 //React Component (like a function)
 export default function App(props) {
-
-  const [messageArray, setMessageArray] = useState(CHAT_LOG);
-
+  //state
+  const [messageArray, setMessageArray] = useState(SAMPLE_CHAT_LOG);
+  const [currentUser, setCurrentUser] = useState(null);
+  console.log("logged in as", currentUser);
+  
   const addMessage = (userName, messageText, channel) => {
     const newMessage = {
       "userId": userName.toLowerCase(),
@@ -28,6 +30,15 @@ export default function App(props) {
     setMessageArray(newMessageArray);
   }
 
+  const loginUser = (userName) => {
+    //processing
+    //example: if userName is in registered user list, update--otherwise reject
+    if(userName == '') { //handle bad argument
+      userName = null;
+    }
+
+    setCurrentUser(userName); //update state and re-render
+  }
 
   //should get it from the chat log itself?
   const CHANNEL_LIST = [
@@ -40,7 +51,7 @@ export default function App(props) {
 
   return (
     <div className="container-fluid d-flex flex-column" >
-      <NavBar />
+      <NavBar user={currentUser} loginFunction={loginUser} />
       <main className="row flex-grow-1">
         <div className="col-3">
           <ChannelNav channelList={CHANNEL_LIST} currentChannel={currentChannel} />
@@ -49,7 +60,7 @@ export default function App(props) {
             <div className="chat-pane">
               <MessagePane messageHistory={messageArray} currentChannel={currentChannel} />
             </div>
-            <ComposeForm howToAddMessage={addMessage} />
+            <ComposeForm user={currentUser} howToAddMessage={addMessage} />
         </div>
       </main>
     </div>    
