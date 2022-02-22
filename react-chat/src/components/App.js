@@ -13,7 +13,7 @@ export default function App(props) {
 
   const addMessage = (userName, messageText, channel) => {
     const newMessage = {
-      "userId": userName,
+      "userId": userName.toLowerCase(),
       "userName": userName,
       "userImg": "/img/"+userName+".png",
       "text": messageText,
