@@ -11,9 +11,9 @@ export default function App(props) {
 
   const [messageArray, setMessageArray] = useState(CHAT_LOG);
 
-  const addMessage = (userName, messageText, channel) => {
+  const addMessage = (userId, userName, messageText, channel) => {
     const newMessage = {
-      "userId": userName,
+      "userId": userName.toLowerCase(),
       "userName": userName,
       "userImg": "/img/"+userName+".png",
       "text": messageText,

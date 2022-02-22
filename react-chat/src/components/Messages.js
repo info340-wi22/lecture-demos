@@ -2,28 +2,8 @@ import { useState } from 'react';
 
 export function MessagePane( props ) { //destructure props
 
-  console.log("rendering MessagePane") //called the function!
-
-  const [currentCount, setCurrentCount] = useState(0); //make a new state variable with initial value 0
-  console.log(currentCount);
-
-  // const currentCount = useStateResultArray[0] //what is the current value?
-  // const setCurrentCount = useStateResultArray[1] //a function!
-  //const [currentCount, setCurrentCount ] = useStateResultArray;
-
-
   //take object keys, and assign to variable with same matching name
   const {messageHistory, currentChannel} = props; //destructuring
-
-
-  const handleClick = (event) => {
-    console.log("clicked");
-
-    //currentCount = currentCount+1; //is a constant! cannot do!
-    setCurrentCount(4); //1. MODIFY THE STATE
-                        //2. RE-RENDER THE COMPONENT
-  }
-
 
   //only show channel messages
   //is an array of "message" {}
@@ -31,12 +11,13 @@ export function MessagePane( props ) { //destructure props
     return aMessageObj.channel === currentChannel
   })
 
+  //convert into array of DOM elements
   const messageComponentArray = channelMessages.map((aMessageObj) => {
     const theElem = <Message messageData={aMessageObj} key={aMessageObj.timestamp} />
     return theElem; //goes into new array
   })
 
-  //conditional rendering
+  //conditional rendering -- show different content if no messages
   if (messageComponentArray.length === 0) {
     return (
       <div>
@@ -48,13 +29,6 @@ export function MessagePane( props ) { //destructure props
   //return chat elements
   return (
     <div className="my-2">
-
-      {/*                                       addEventListener('click', someFunction) */}
-      <button className="btn btn-outline-primary mb-3" onClick={handleClick}>
-        Click count: {currentCount}
-      </button>
-      <hr/>
-
       {messageComponentArray}
     </div>
   )
