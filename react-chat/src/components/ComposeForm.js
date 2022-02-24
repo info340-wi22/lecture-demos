@@ -10,7 +10,7 @@ export default function ComposeForm(props) {
 
     //call the function callback I was given
     //arguments: userName, text, channel
-    props.howToAddMessage(props.user, userInput, "general");
+    props.howToAddMessage(props.user, userInput, props.currentChannel);
 
     setUserInput("") //remove message after sending
   }
@@ -29,7 +29,7 @@ export default function ComposeForm(props) {
   return (
     <form className="my-2">
       <div className="input-group">
-        { user && <img src={'img/'+user+'.png'} alt={user+" avatar"} /> }
+        { user && <img src={'/img/'+user+'.png'} alt={user+" avatar"} /> }
         <textarea 
           className="form-control" rows="2" placeholder="Type a new message"
           onChange={handleChange}

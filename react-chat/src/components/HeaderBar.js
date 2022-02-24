@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 
 export default function NavBar(props) {
 
@@ -8,15 +9,18 @@ export default function NavBar(props) {
       {/* links go here */}
       <ul className="nav nav-pills">
         <li className="nav-item">
-          <a className="nav-link" href="/">Home</a>
+          <NavLink to="/" className="nav-link">Home</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/about">About</a>
+          <NavLink to="/chat/general" className="nav-link">Chat</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/signin">
-            <img src={'img/' + props.user + '.png'} alt={props.user + " avatar"} />
-          </a>
+          <NavLink to="/about" className="nav-link">About</NavLink>
+        </li>
+        <li className="nav-item">
+          <Link to="/signin" className="nav-link">
+            <img src={'/img/' + props.user + '.png'} alt={props.user + " avatar"} />
+          </Link>
         </li>
       </ul>
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import ChannelNav from './ChannelNav';
 import { MessagePane } from './Messages';
@@ -14,38 +15,21 @@ const CHANNEL_LIST = [
   'channel-4'
 ]
 
-const currentChannel = "general";
-
 export default function ChatPage(props) {
-  const [messageArray, setMessageArray] = useState(SAMPLE_CHAT_LOG);
 
-  const addMessage = (userName, messageText, channel) => {
-    const newMessage = {
-      "userId": userName.toLowerCase(),
-      "userName": userName,
-      "userImg": "/img/"+userName+".png",
-      "text": messageText,
-      "timestamp": Date.now(),
-      "channel": channel
-    }
-
-    //make a copy for the new array
-    const newMessageArray = [...messageArray, newMessage];
-    
-    //update state which will re-render
-    setMessageArray(newMessageArray);
-  }
+  const urlParams = useParams();
+  console.log(urlParams);
 
   return (
     <div className="row flex-grow-1">
-      <div className="col-2">
+      <div className="col-3">
         <ChannelNav channelList={CHANNEL_LIST} />
       </div>
-      <div className="col-10 d-flex flex-column chat-column">
+      <div className="col-9 d-flex flex-column chat-column">
           <div className="chat-pane">
-            <MessagePane messageHistory={messageArray} currentChannel={currentChannel} />
+            <MessagePane messageHistory={props.messageArray} currentChannel={urlParams.channelName} />
           </div>
-          <ComposeForm user={props.user} howToAddMessage={addMessage} />
+          <ComposeForm user={props.user} howToAddMessage={props.addMessage} currentChannel={urlParams.channelName} />
       </div>
     </div>
   )

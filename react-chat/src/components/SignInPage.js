@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const DEFAULT_USERS = [null, "Penguin", "Parrot", "Zebra"]
@@ -13,9 +13,7 @@ export default function SignInPage(props) {
 
   //rendering
   const userButtons = DEFAULT_USERS.map((userName) => {
-    let classListString = "btn user-icon";
-    if(userName == props.user) { //if who is logged in
-      classListString += " bg-success";
+    if(userName === props.user) { //if who is logged in
       return null;
     }
 
