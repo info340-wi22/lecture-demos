@@ -67,3 +67,17 @@ header img {
 header button.user-icon {
   padding: .25rem;
 }
+
+.bg-primary .nav-link {
+  color: white;
+}
+
+.bg-primary .nav-pills .nav-link.active {
+  color: #0d6efd;
+  background-color: white;
+}
+
+header .nav-item {
+  display: flex;
+  align-items:center;
+}
