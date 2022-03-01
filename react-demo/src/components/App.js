@@ -1,34 +1,52 @@
-import { MessageList } from './Messages';
-import { Header } from './Header';
+import React, { useState } from 'react';
 
-//no variables!
+//example GitHub repo data
+const EXAMPLE_DATA = [
+  { name: "react", html_url: "https://github.com/facebook/react" },
+  { name: "react-bootstrap", html_url: "https://github.com/react-bootstrap/react-bootstrap" },    
+  { name: "react-router", html_url: "https://github.com/remix-run/react-router" },
+];
+
 
 function App(props) {
+  const [data, setData] = useState(EXAMPLE_DATA);
+  //control form
+  const [queryInput, setQueryInput] = useState('');
 
-  const message = "I am variable"
-  const imgUrl = "puppy.jpg";
+  const handleChange = (event) => {
+    setQueryInput(event.target.value);
+  }
 
-  //for(...)
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  const messageArray = [
-    "See you later alligator",
-    "after a while crocodile",
-    "take care, polar bear",
-    "gotta go, buffalo",
-    "out the door, dinosaur"
-  ]
+  }
+
+  //render the data
+  const dataElemArray = data.map((repo) => {
+    return <li><a href={repo.html_url}>{repo.name}</a></li>
+  })
 
   return (
-    <div>
-      <Header />
-      <main>
-        <MessageList messages={messageArray} />
-        <p>{message.toUpperCase() + "!!"}</p>
-        {/* <p>{[1, 2, 3]}</p> */}
-        <img src={imgUrl} alt="a cute puppy" />
-      </main>
+    <div className="container">
+      <header><h1>AJAX Demo</h1></header> 
+
+      <form method="GET" action="https://api.github.com/search/repositories">
+        <input type="text" className="form-control mb-2" 
+          name="q"
+          placeholder="Search Github for..."
+          value={queryInput} onChange={handleChange}
+        />
+        <button type ="submit" className="btn btn-primary">Search!</button>
+      </form>
+
+      <div className="mt-4">
+        <h2>Results</h2>
+        {/* results go here */}
+        {dataElemArray}
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
