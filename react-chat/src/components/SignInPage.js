@@ -4,16 +4,23 @@ import Dropdown from 'react-bootstrap/Dropdown';
 const DEFAULT_USERS = [null, "Penguin", "Parrot", "Zebra"]
 
 export default function SignInPage(props) {
+  //convenience
+  const currentUserName = props.user ? props.user.userName : null; //current userName
 
   //callback/functions
   const handleClick = (event) => {
     let whichUser = event.currentTarget.name //access button, not image
-    props.loginFunction(whichUser);
+    if(whichUser === '') {
+      props.loginFunction(null)
+    } else {
+      const userId = DEFAULT_USERS.indexOf(whichUser)
+      props.loginFunction(userId, whichUser);
+    }
   }
 
   //rendering
   const userButtons = DEFAULT_USERS.map((userName) => {
-    if(userName === props.user) { //if who is logged in
+    if(userName === currentUserName) { //if who is logged in
       return null;
     }
 
@@ -31,7 +38,7 @@ export default function SignInPage(props) {
         <p className="lead">Pick a user:</p>
         <Dropdown>
           <Dropdown.Toggle variant="light">
-            <img src={'img/' + props.user + '.png'} alt={props.user + " avatar"} />
+            <img src={'img/' + currentUserName + '.png'} alt={currentUserName + " avatar"} />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             {userButtons}

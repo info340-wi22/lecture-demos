@@ -6,15 +6,15 @@ export default function ChannelNav(props) {
 
   const channelListItems = channelList.map((channelName) => {
     return (
-      <li className="list-item" key={channelName}>
-        <NavLink to={"/chat/"+channelName}>#{channelName}</NavLink>
+      <li className="nav-item px-2" key={channelName}>
+        <NavLink to={"/chat/"+channelName} className="nav-link">#{channelName}</NavLink>
       </li>
     )
   })
 
   return (
     <nav className="channel-list bg-secondary text-light h-100 py-3">
-      <ul>
+      <ul className="nav nav-pills flex-column">
         {channelListItems}
       </ul>
     </nav>
