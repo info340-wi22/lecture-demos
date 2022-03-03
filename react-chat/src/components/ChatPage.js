@@ -17,8 +17,27 @@ const CHANNEL_LIST = [
 
 export default function ChatPage(props) {
 
+  const [messageArray, setMessageArray] = useState(SAMPLE_CHAT_LOG);
   const urlParams = useParams();
-  console.log(urlParams);
+
+  const addMessage = (userObj, messageText, channel) => {
+    const newMessage = {
+      "userId": userObj.uid,
+      "userName": userObj.userName,
+      "userImg": "/img/"+userObj.userName+".png",
+      "text": messageText,
+      "timestamp": Date.now(),
+      "channel": channel
+    }
+
+    //make a copy for the new array
+    const newMessageArray = [...messageArray, newMessage];
+    
+    //update state which will re-render
+    setMessageArray(newMessageArray);
+  }
+
+
 
   return (
     <div className="row flex-grow-1">
@@ -27,9 +46,9 @@ export default function ChatPage(props) {
       </div>
       <div className="col-9 d-flex flex-column chat-column">
           <div className="chat-pane">
-            <MessagePane messageHistory={props.messageArray} currentChannel={urlParams.channelName} />
+            <MessagePane messageHistory={messageArray} currentChannel={urlParams.channelName} />
           </div>
-          <ComposeForm user={props.user} howToAddMessage={props.addMessage} currentChannel={urlParams.channelName} />
+          <ComposeForm user={props.user} howToAddMessage={addMessage} currentChannel={urlParams.channelName} />
       </div>
     </div>
   )

@@ -36,7 +36,11 @@ export function MessagePane( props ) { //destructure props
 
 function Message(props) {
   // console.log(props);
-  const { userImg, userName, text } = props.messageData; //destructure
+  const { userImg, userName, text } = props.messageData; //destructure for what we want
+
+  const handleClick = (event) => {
+    console.log("liking");
+  }
 
   return (
     <div className="message d-flex">
@@ -48,7 +52,7 @@ function Message(props) {
         <p>
           {text}
         </p>
-        <button className="btn like-button">
+        <button className="btn like-button" onClick={handleClick}>
           <span className="material-icons" style={{ color: "grey" }}>favorite_border</span>
         </button>
       </div>
