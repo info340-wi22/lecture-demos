@@ -12,7 +12,7 @@ export default function App(props) {
 
   //state
   const [currentUser, setCurrentUser] = useState(null);
-  console.log("logged in as", currentUser);
+  // console.log("logged in as", currentUser);
 
   useEffect(() => {
     loginUser(1, 'Penguin');
@@ -21,10 +21,10 @@ export default function App(props) {
 
   const loginUser = (userId, userName) => {
     if (!userId) {
-      console.log("logging out");
+      // console.log("logging out");
       setCurrentUser(null);
     } else {
-      console.log("logging in", userName);
+      // console.log("logging in", userName);
       setCurrentUser({ uid: userId, userName: userName })
       navigateTo('/chat/general'); //go to chat "after" we log in!
     }
