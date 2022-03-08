@@ -25,11 +25,15 @@ export default function ComposeForm(props) {
   //   return null;
   // }
 
+  let avatarUrl = '/img/null.png'
+  if(user.photoURL) {
+    avatarUrl = user.photoURL;
+  }
 
   return (
     <form className="my-2">
       <div className="input-group">
-        { user && <img src={'/img/'+user.userName+'.png'} alt={user.userName+" avatar"} /> }
+        { user && <img src={avatarUrl} alt={user.displayName+" avatar"} /> }
         <textarea 
           className="form-control" rows="2" placeholder="Type a new message"
           onChange={handleChange}

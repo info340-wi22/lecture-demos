@@ -1,11 +1,14 @@
 import { NavLink } from 'react-router-dom';
 
+import { getAuth, signOut } from 'firebase/auth'
+
 export default function NavBar(props) {
   //convenience
   //const userName = props.user ? props.user.userName : null;
 
   const handleSignOut = (event) => {
     //sign out here
+    signOut(getAuth());
   }
 
   return (
@@ -33,7 +36,7 @@ export default function NavBar(props) {
         }
         {props.user && <>
           <li className="nav-item">
-            <NavLink to="/profile" className="nav-link">Profile</NavLink>
+            <NavLink to="/profile" className="nav-link">{props.user.displayName}</NavLink>
           </li>
           <li className="nav-item">
             <button className="btn btn-secondary ms-2" onClick={handleSignOut}>Sign Out</button>

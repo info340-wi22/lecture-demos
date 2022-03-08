@@ -55,8 +55,8 @@ export default function ChatPage(props) {
 
     const newMessage = {
       "userId": userObj.uid,
-      "userName": userObj.userName,
-      "userImg": "/img/"+userObj.userName+".png",
+      "userName": userObj.displayName,
+      "userImg": userObj.photoURL,
       "text": messageText,
       "timestamp": Date.now(),
       "channel": channel

@@ -53,10 +53,15 @@ function Message(props) {
   if(liked)
     likeColor = "red"
 
+  let avatarUrl = '/img/null.png'
+  if(userImg) {
+    avatarUrl = userImg;
+  }  
+
   return (
     <div className="message d-flex">
       <div>
-        <img src={userImg} alt={userName+" avatar"} />
+        <img src={avatarUrl} alt={userName+" avatar"} />
       </div>
       <div className="message-body position-relative">
         <p>{userName}</p>
