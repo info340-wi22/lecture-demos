@@ -1,8 +1,12 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function NavBar(props) {
   //convenience
-  const userName = props.user ? props.user.userName : null;
+  //const userName = props.user ? props.user.userName : null;
+
+  const handleSignOut = (event) => {
+    //sign out here
+  }
 
   return (
     <header className="container-fluid text-light bg-primary px-1 d-flex justify-content-between">
@@ -21,14 +25,31 @@ export default function NavBar(props) {
         <li className="nav-item">
           <NavLink to="/about" className="nav-link">About</NavLink>
         </li>
-        <li className="nav-item">
+
+        {!props.user &&
+          <li className="nav-item">
+            <NavLink to="/signin" className="nav-link">Sign In</NavLink>
+          </li>
+        }
+        {props.user && <>
+          <li className="nav-item">
+            <NavLink to="/profile" className="nav-link">Profile</NavLink>
+          </li>
+          <li className="nav-item">
+            <button className="btn btn-secondary ms-2" onClick={handleSignOut}>Sign Out</button>
+          </li>
+          </>
+        }
+
+
+        {/* <li className="nav-item">
           <Link to="/signin" className="nav-link">
             <img src={'/img/' + userName + '.png'} alt={userName + " avatar"} />
-          </Link>
+          </Link> */}
         {/* <span class="nav-link">
             <img src={'img/' + userName + '.png'} alt={userName + " avatar"} onClick={handleClick} />
           </span> */}          
-        </li>
+        {/* </li> */}
       </ul>
 
     </header>

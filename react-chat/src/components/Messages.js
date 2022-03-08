@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getDatabase, ref, set as firebaseSet, push as firebasePush, onValue } from 'firebase/database'; //from the rtdb, NOT firestore
+import { getDatabase, ref, set as firebaseSet, } from 'firebase/database';
 
 
 export function MessagePane( props ) { //destructure props

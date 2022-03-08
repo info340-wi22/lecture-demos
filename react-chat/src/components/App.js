@@ -4,6 +4,7 @@ import { Routes, Route, Outlet, Navigate, useNavigate } from 'react-router-dom';
 import NavBar from './HeaderBar';
 import ChatPage from './ChatPage';
 import SignInPage from './SignInPage';
+import ProfilePage from './ProfilePage';
 import * as Static from './StaticPages';
 
 //React Component (like a function)
@@ -14,9 +15,10 @@ export default function App(props) {
   const [currentUser, setCurrentUser] = useState(null);
   // console.log("logged in as", currentUser);
 
-  useEffect(() => {
-    loginUser(1, 'Penguin');
-  }, [])
+  //initial login for debugging
+  // useEffect(() => {
+  //   loginUser(1, 'Penguin');
+  // }, [])
 
 
   const loginUser = (userId, userName) => {
@@ -37,6 +39,7 @@ export default function App(props) {
           <Route path="signin" element={<SignInPage user={currentUser} loginFunction={loginUser} />} />
           <Route element={<ProtectedPage user={currentUser} />} >
             <Route path="chat/:channelName" element={<ChatPage user={currentUser} />}/>
+            <Route path="profile" element={<ProfilePage user={currentUser} />}/>
           </Route>
           <Route index element={<Static.WelcomePage />} />
           <Route path="about" element={<Static.AboutPage />} />

@@ -5,41 +5,16 @@ import ChannelNav from './ChannelNav';
 import { MessagePane } from './Messages';
 import ComposeForm from './ComposeForm';
 
-import { getDatabase, ref, set as firebaseSet, push as firebasePush, onValue } from 'firebase/database'; //from the rtdb, NOT firestore
+import { getDatabase, ref, /*set as firebaseSet,*/ push as firebasePush, onValue } from 'firebase/database'; //from the rtdb, NOT firestore
 
 import SAMPLE_CHAT_LOG from '../data/chat_log.json';
-
-/*
-const react-chat-wi22-default-rtdb: {
-  message: "Hello world"
-  favorites: {
-    day: "Friday"
-  },
-  allPosts: {
-    MxFsr: {A},
-    MsFst: {B},
-    MsFsu: {C},
-  }
-
-  {
-    0: {A}
-    1: {B}
-    2: {C}
-  }
-
-  //delete item @MxFst; //like item @MxFst
-
-}
-
-*/
 
 //get it from the chat log itself?
 const CHANNEL_LIST = ['general','random','dank-memes','channel-4']
 
 export default function ChatPage(props) {
 
-  const [messageArray, setMessageArray] = useState(SAMPLE_CHAT_LOG);
-  const [exampleMessage, setExampleMessage] = useState({text:"initial"});
+  const [messageArray, setMessageArray] = useState([]);
   const urlParams = useParams();
 
   const db = getDatabase(); // NOT the json data
@@ -51,22 +26,15 @@ export default function ChatPage(props) {
     //will trigger on page load
     //onValue will hook up the listener, and return how to turn it off (the uninstaller)
     const offFunction = onValue(allPostsRef, (snapshot) => {
-      console.log("database changed!")
       const allPostsObject = snapshot.val(); //get the JSON from the reference
-      //console.log(allPostsObject);
       const postKeyArray = Object.keys(allPostsObject) //['MxFsr', 'MxFst', 'MxFsu'];
-      //console.log(postKeyArray);
       const allPostsArray = postKeyArray.map((keyString) => {
-        // const whichObject = allPostsObject[keyString]
-        // whichObject.firebaseKey = keyString;
         const whichObject = {...allPostsObject[keyString], firebaseKey: keyString};
         return whichObject; //{channel, text, user}
       })
-      console.log(allPostsArray);
 
       //usually save to state
       setMessageArray(allPostsArray)
-      // setExampleMessage(newValue); //causes page to re-render
     })
 
     //turn off the listener when we leave
@@ -75,7 +43,7 @@ export default function ChatPage(props) {
       offFunction();
     }
     return cleanup; //end with "what to do when component leaves"
-  }, [])
+  }, [db])
 
 
   const addMessage = (userObj, messageText, channel) => {
@@ -116,7 +84,6 @@ export default function ChatPage(props) {
       </div>
       <div className="col-9 d-flex flex-column chat-column">
           <div className="chat-pane">
-            <p className="alert-warning">{exampleMessage.text}</p>
             <MessagePane messageHistory={messageArray} currentChannel={urlParams.channelName} />
           </div>
           <ComposeForm user={props.user} howToAddMessage={addMessage} currentChannel={urlParams.channelName} />
